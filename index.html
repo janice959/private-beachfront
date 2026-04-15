@@ -1,63 +1,952 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Private Beachfront</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #0f4c81 0%, #1a6ea8 50%, #2e9fd3 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-    }
-
-    .container {
-      text-align: center;
-      padding: 2rem;
-      max-width: 700px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    p {
-      font-size: 1.25rem;
-      line-height: 1.8;
-      opacity: 0.9;
-      margin-bottom: 2rem;
-    }
-
-    .wave {
-      font-size: 2rem;
-      animation: sway 2s ease-in-out infinite;
-      display: inline-block;
-    }
-
-    @keyframes sway {
-      0%, 100% { transform: rotate(-5deg); }
-      50%       { transform: rotate(5deg); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<title>The Resthouse Laiya — Private Beachfront Estate</title>
+<meta name="description" content="A private 9-hectare beachfront estate in Laiya, San Juan, Batangas.">
+<meta property="og:title" content="The Resthouse Laiya — Private Beachfront Estate">
+<meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%232F2F2F'/><text y='78' x='50' text-anchor='middle' font-size='68' font-family='Georgia,serif' fill='%23C6A97A'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<style>
+:root{--sand:#E8D8C3;--warm-white:#F9F6F2;--olive:#7A8A7B;--charcoal:#2F2F2F;--gold:#C6A97A;--dark-sand:#C4A882;--cream:#F2EBE0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--warm-white);color:var(--charcoal);overflow-x:hidden;-webkit-overflow-scrolling:touch;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
+#loader{position:fixed;inset:0;background:var(--charcoal);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;animation:loaderDismiss .8s ease 2.5s forwards;pointer-events:none;}
+@keyframes loaderDismiss{to{opacity:0;visibility:hidden;}}
+.loader-text{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--gold);letter-spacing:.15em;opacity:0;animation:loaderFade 1.5s ease forwards .3s;}
+.loader-sub{font-size:.7rem;color:var(--sand);letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:loaderFade 1.5s ease forwards .7s;}
+.loader-line{width:0;height:1px;background:var(--gold);animation:loaderLine 1.8s ease forwards .2s;}
+@keyframes loaderFade{to{opacity:1;}}
+@keyframes loaderLine{to{width:120px;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;transition:all .4s ease;}
+nav.scrolled{background:rgba(249,246,242,.97);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(198,169,122,.2);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--warm-white);cursor:pointer;text-decoration:none;transition:color .4s;}
+nav.scrolled .nav-logo{color:var(--charcoal);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+.nav-links a{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);text-decoration:none;cursor:pointer;position:relative;transition:color .3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s;}
+.nav-links a:hover::after{transform:scaleX(1);}
+nav.scrolled .nav-links a{color:var(--charcoal);}
+.nav-links a:hover,nav.scrolled .nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:white!important;padding:10px 22px;border-radius:2px;font-size:.7rem!important;letter-spacing:.15em;}
+.nav-cta:hover{background:var(--dark-sand)!important;}
+.nav-cta::after{display:none!important;}
+.page{display:none;}.page.active{display:block;}
+.hero{height:100vh;min-height:600px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease;overflow:hidden;}
+.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
+.hero-slide.active{opacity:1;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,25,20,.45) 0%,rgba(30,25,20,.2) 50%,rgba(30,25,20,.6) 100%);}
+.hero-content{position:relative;z-index:2;text-align:center;color:white;padding:0 20px;}
+.hero-eyebrow{font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;animation:fadeUp .8s ease both .3s;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,6rem);font-weight:400;line-height:1.1;margin-bottom:1.5rem;animation:fadeUp .8s ease both .5s;}
+.hero-title em{font-style:italic;color:var(--sand);}
+.hero-subtitle{font-size:.9rem;font-weight:300;letter-spacing:.08em;color:rgba(255,255,255,.8);margin-bottom:3rem;animation:fadeUp .8s ease both .7s;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s ease both .9s;}
+.btn-primary{background:var(--gold);color:white;padding:14px 36px;border:none;cursor:pointer;font-family:'Poppins',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;border-radius:2px;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:50px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.btn-primary:hover{background:var(--dark-sand);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:white;padding:13px 36px;border:1px solid rgba(255,255,255,.6);cursor:pointer;font-family:'Poppins',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;border-radius:2px;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:50px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.btn-outline:hover{border-color:white;background:rgba(255,255,255,.1);transform:translateY(-2px);}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;animation:fadeIn .8s ease both 1.2s;}
+.hero-scroll span{font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.6);text-transform:uppercase;}
+.scroll-line{width:1px;height:40px;background:rgba(255,255,255,.4);position:relative;overflow:hidden;}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;right:0;height:100%;background:var(--gold);animation:scrollDown 2s ease-in-out infinite;}
+@keyframes scrollDown{to{top:100%;}}
+.hero-dots{position:absolute;bottom:2rem;right:5%;z-index:3;display:flex;flex-direction:column;gap:8px;}
+.hero-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s;}
+.hero-dot.active{background:var(--gold);transform:scale(1.4);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+section{padding:7rem 5%;}
+.section-eyebrow{font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:400;line-height:1.2;color:var(--charcoal);margin-bottom:1.5rem;}
+.section-title em{font-style:italic;color:var(--olive);}
+.section-body{font-size:.92rem;color:#666;line-height:1.85;font-weight:300;}
+.divider{width:50px;height:1px;background:var(--gold);margin:1.5rem 0;}
+.about-strip{background:var(--charcoal);padding:5rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-img-wrap{position:relative;overflow:hidden;min-height:480px;background:#3a3530;}
+.about-img-wrap img{width:100%;height:480px;object-fit:cover;display:block;transition:transform .8s ease;}
+.about-img-wrap:hover img{transform:scale(1.05);}
+.about-img-badge{position:absolute;bottom:2rem;left:-1rem;background:var(--gold);color:white;padding:1.5rem;text-align:center;}
+.about-img-badge .num{font-family:'Playfair Display',serif;font-size:2.5rem;display:block;line-height:1;}
+.about-img-badge .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-top:4px;display:block;}
+.about-text .section-title,.about-text .section-eyebrow{color:var(--sand);}
+.about-text .section-title em{color:var(--gold);}
+.about-text .section-body{color:rgba(249,246,242,.7);}
+.about-text .divider{background:var(--gold);}
+.stats-row{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap;}
+.stat{border-left:1px solid rgba(198,169,122,.4);padding-left:1.2rem;}
+.stat .n{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);}
+.stat .l{font-size:.68rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.feature-card{position:relative;overflow:hidden;height:500px;cursor:pointer;background:#3a3530;}
+.feature-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease;}
+.feature-card:hover img{transform:scale(1.08);}
+.feature-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,25,20,.85) 0%,transparent 50%);transition:background .5s;}
+.feature-card:hover .feature-overlay{background:linear-gradient(to top,rgba(30,25,20,.9) 0%,rgba(30,25,20,.3) 60%);}
+.feature-content{position:absolute;bottom:0;left:0;right:0;padding:2.5rem;}
+.feature-icon{width:40px;height:40px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.1rem;transition:background .3s;}
+.feature-card:hover .feature-icon{background:var(--gold);}
+.feature-content h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:white;font-weight:400;margin-bottom:.8rem;}
+.feature-content p{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.7;}
+.gallery-section{padding:7rem 5%;background:var(--cream);}
+.masonry{columns:3;column-gap:1rem;margin-top:3rem;}
+.masonry-item{break-inside:avoid;margin-bottom:1rem;position:relative;overflow:hidden;cursor:pointer;background:#c4b8a8;min-height:150px;}
+.masonry-item img{width:100%;display:block;transition:transform .6s ease;}
+.masonry-item:hover img{transform:scale(1.05);}
+.masonry-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;z-index:2;background:rgba(47,47,47,.35);}
+.masonry-item:hover .masonry-overlay{opacity:1;}
+.zoom-icon{width:48px;height:48px;border:1px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;}
+.testimonials{background:var(--charcoal);padding:7rem 5%;}
+.testimonials .section-title{color:var(--sand);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;}
+.testimonial-card{background:rgba(255,255,255,.05);border:1px solid rgba(198,169,122,.2);padding:2.5rem;position:relative;transition:border-color .3s;}
+.testimonial-card:hover{border-color:var(--gold);}
+.quote-mark{font-family:'Playfair Display',serif;font-size:4rem;color:var(--gold);opacity:.3;line-height:1;position:absolute;top:1rem;right:1.5rem;}
+.testimonial-card p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.75);font-style:italic;margin-bottom:1.5rem;font-family:'Playfair Display',serif;}
+.testimonial-author{display:flex;align-items:center;gap:1rem;}
+.author-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:white;font-weight:500;}
+.author-info .name{font-size:.8rem;color:white;font-weight:500;}
+.author-info .title{font-size:.7rem;color:rgba(255,255,255,.4);}
+.stars{color:var(--gold);font-size:.75rem;margin-bottom:4px;}
+.cta-banner{background:var(--sand);padding:6rem 5%;text-align:center;position:relative;overflow:hidden;}
+.cta-banner::before{content:'ESCAPE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:12vw;color:rgba(47,47,47,.05);white-space:nowrap;pointer-events:none;}
+.cta-banner .section-title{color:var(--charcoal);}
+.cta-banner .section-body{color:#7a6a5a;max-width:500px;margin:0 auto 2.5rem;}
+#lightbox{position:fixed;inset:0;z-index:9998;background:rgba(20,18,16,.95);display:none;align-items:center;justify-content:center;padding:2rem;}
+#lightbox.open{display:flex;}
+#lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;}
+.lb-close{position:absolute;top:1.5rem;right:2rem;color:white;font-size:2rem;cursor:pointer;background:none;border:none;opacity:.7;}
+.lb-close:hover{opacity:1;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);color:white;font-size:2rem;cursor:pointer;background:rgba(255,255,255,.1);border:none;width:50px;height:50px;display:flex;align-items:center;justify-content:center;}
+.lb-prev{left:1rem;}.lb-next{right:1rem;}
+.page-hero{height:60vh;min-height:400px;position:relative;display:flex;align-items:flex-end;padding:5%;overflow:hidden;}
+.page-hero .page-bg-img{position:absolute;inset:0;z-index:0;}
+.page-hero .page-bg-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.page-hero .hero-gradient{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(30,25,20,.82) 0%,transparent 60%);}
+.page-hero-content{position:relative;z-index:2;color:white;}
+.page-eyebrow{font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:block;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:400;line-height:1.15;}
+.villa-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.villa-specs{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
+.spec-box{background:var(--cream);padding:1.2rem 1.5rem;text-align:center;flex:1;min-width:100px;}
+.spec-box .spec-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);display:block;}
+.spec-box .spec-lbl{font-size:.65rem;letter-spacing:.15em;color:#888;text-transform:uppercase;display:block;margin-top:4px;}
+.amenity-list{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:2rem;}
+.amenity-item{display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:#555;padding:.8rem;border:1px solid var(--sand);transition:border-color .3s;}
+.amenity-item:hover{border-color:var(--gold);}
+.amenity-icon{color:var(--gold);font-size:1rem;flex-shrink:0;}
+.room-gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:.8rem;height:480px;}
+.room-img{overflow:hidden;position:relative;background:#c4b8a8;}
+.room-img:first-child{grid-row:1/3;}
+.room-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.room-img:hover img{transform:scale(1.05);}
+.room-label{position:absolute;bottom:.8rem;left:.8rem;background:rgba(30,25,20,.75);color:white;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;padding:5px 10px;}
+.activities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
+.activity-card{text-align:center;padding:2.5rem 1.5rem;border:1px solid var(--sand);transition:all .35s;}
+.activity-card:hover{border-color:var(--gold);background:var(--cream);transform:translateY(-5px);}
+.activity-emoji{font-size:1.6rem;margin-bottom:.7rem;}
+.activity-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--charcoal);margin-bottom:.5rem;}
+.activity-card p{font-size:.78rem;color:#888;line-height:1.65;}
+.activities-grid--3{grid-template-columns:repeat(3,1fr);}
+.activity-card--rich{padding:0;text-align:left;border:1px solid var(--sand);overflow:hidden;}
+.activity-card--rich:hover{transform:translateY(-6px);border-color:var(--gold);}
+.activity-card-img{height:180px;overflow:hidden;background:#c4b8a8;}
+.activity-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.activity-card--rich:hover .activity-card-img img{transform:scale(1.07);}
+.activity-card-body{padding:1.5rem;}
+.act-tag{display:inline-block;margin-top:1rem;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(198,169,122,.4);padding:3px 10px;}
+.act-group-label{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.act-group-line{flex:1;height:1px;background:var(--sand);}
+.act-badge{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;white-space:nowrap;}
+.act-badge--estate{background:var(--charcoal);color:var(--sand);}
+.act-badge--nearby{background:var(--olive);color:white;}
+.lifestyle-section{background:var(--charcoal);padding:8rem 5%;text-align:center;}
+.lifestyle-quote{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.5rem);color:var(--sand);font-style:italic;font-weight:400;line-height:1.5;max-width:700px;margin:0 auto;}
+.lifestyle-quote::before,.lifestyle-quote::after{content:'"';color:var(--gold);font-size:1.2em;}
+.usp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;}
+.usp-card{padding:2.5rem;background:var(--cream);border-top:3px solid var(--gold);transition:transform .3s;}
+.usp-card:hover{transform:translateY(-4px);}
+.usp-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:.8rem;color:var(--charcoal);}
+.usp-card p{font-size:.82rem;color:#777;line-height:1.7;}
+.gallery-page-masonry{columns:4;column-gap:.8rem;padding:0 5% 4rem;}
+.gal-filter{display:flex;gap:1rem;justify-content:center;padding:3rem 5%;flex-wrap:wrap;}
+.gal-btn{padding:10px 24px;border:1px solid var(--sand);background:transparent;cursor:pointer;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#777;transition:all .3s;font-family:'Poppins',sans-serif;min-height:44px;}
+.gal-btn.active,.gal-btn:hover{background:var(--gold);color:white;border-color:var(--gold);}
+.rates-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.rate-card{border:1px solid var(--sand);padding:2.5rem;position:relative;transition:all .35s;}
+.rate-card:hover{border-color:var(--gold);box-shadow:0 8px 30px rgba(198,169,122,.15);}
+.rate-card.featured{border-color:var(--gold);background:linear-gradient(135deg,var(--cream) 0%,var(--warm-white) 100%);}
+.featured-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:white;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:5px 16px;}
+.rate-type{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.rate-price{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--charcoal);line-height:1;}
+.rate-price sup{font-size:1rem;top:-.8rem;position:relative;}
+.rate-per{font-size:.72rem;color:#999;margin-left:4px;}
+.rate-divider{height:1px;background:var(--sand);margin:1.5rem 0;}
+.rate-features{list-style:none;}
+.rate-features li{font-size:.8rem;color:#666;padding:.4rem 0;display:flex;align-items:center;gap:.6rem;}
+.rate-features li::before{content:'checkmark';content:'✓';color:var(--gold);flex-shrink:0;}
+.addons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;}
+.addon-card{background:var(--cream);padding:1.5rem;text-align:center;}
+.addon-price{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);}
+.addon-name{font-size:.75rem;color:#777;margin-top:4px;}
+.booking-form-section{background:var(--charcoal);padding:6rem 5%;}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.form-group{margin-bottom:1.2rem;}
+.form-label{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.5rem;}
+.form-input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:14px 16px;color:white;font-family:'Poppins',sans-serif;font-size:16px;transition:border-color .3s;outline:none;-webkit-appearance:none;border-radius:0;}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:rgba(255,255,255,.3);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.booking-info .section-eyebrow{color:var(--gold);}
+.booking-info .section-title{color:var(--sand);}
+.booking-info .section-body{color:rgba(255,255,255,.6);}
+.booking-info .divider{background:var(--gold);}
+.messenger-cta{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.07);border:1px solid rgba(198,169,122,.3);padding:1.2rem 1.5rem;margin-top:2rem;cursor:pointer;transition:all .3s;text-decoration:none;}
+.messenger-cta:hover{border-color:var(--gold);background:rgba(198,169,122,.1);}
+.messenger-icon{width:40px;height:40px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;flex-shrink:0;}
+.messenger-text .mt{font-size:.78rem;color:white;}
+.messenger-text .ms{font-size:.68rem;color:rgba(255,255,255,.5);}
+.contact-section{padding:6rem 5%;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.contact-item{display:flex;align-items:flex-start;gap:1.2rem;margin-top:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--sand);}
+.contact-icon{width:44px;height:44px;background:var(--cream);border:1px solid var(--sand);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;}
+.contact-item .ci-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.contact-item .ci-val{font-size:.88rem;color:var(--charcoal);line-height:1.5;}
+.map-container{height:420px;background:var(--cream);border:1px solid var(--sand);overflow:hidden;margin-top:2rem;}
+.map-container iframe{width:100%;height:100%;border:none;}
+.contact-form-box{background:var(--cream);padding:3rem;}
+.contact-form .form-input{background:white;color:var(--charcoal);border:1px solid var(--sand);}
+.contact-form .form-label{color:#777;}
+.contact-form .form-input:focus{border-color:var(--gold);}
+.contact-form .form-input::placeholder{color:#bbb;}
+/* ═══ REDESIGNED FOOTER ═══ */
+footer{background:#1a1714;position:relative;overflow:hidden;}
+footer{background:#1c1a17;}
+.footer-inner{padding:4rem 5% 0;display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:5rem;align-items:start;}
+.footer-brand-logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--sand);margin-bottom:.3rem;}
+.footer-brand-tagline{font-size:.58rem;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;margin-bottom:1.2rem;}
+.footer-brand-desc{font-size:.76rem;color:rgba(255,255,255,.32);line-height:1.85;max-width:260px;margin-bottom:1.5rem;}
+.footer-social-row{display:flex;gap:.6rem;}
+.footer-social-btn{width:32px;height:32px;border:1px solid rgba(198,169,122,.25);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.72rem;font-weight:600;text-decoration:none;transition:all .3s;font-family:'Poppins',sans-serif;}
+.footer-social-btn:hover{border-color:var(--gold);color:var(--gold);}
+.footer-col-title{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(198,169,122,.7);margin-bottom:1.2rem;}
+.footer-nav-links{list-style:none;}
+.footer-nav-links li{margin-bottom:.7rem;}
+.footer-nav-links a{font-size:.8rem;color:rgba(255,255,255,.38);text-decoration:none;cursor:pointer;transition:color .2s;}
+.footer-nav-links a:hover{color:rgba(255,255,255,.75);}
+.footer-contact-row{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:1rem;}
+.fci{font-size:.8rem;color:var(--gold);flex-shrink:0;line-height:1.6;}
+.fcv{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.6;}
+.fcv a{color:var(--gold);text-decoration:none;}
+.footer-divider{margin:3rem 5% 0;height:1px;background:rgba(255,255,255,.06);}
+.footer-bottom{padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+.footer-bottom-left{font-size:.67rem;color:rgba(255,255,255,.2);}
+.footer-bottom-right{font-size:.63rem;color:rgba(255,255,255,.13);letter-spacing:.08em;}
+/* ═══ CHAT WIDGET ═══ */
+#chat-btn{position:fixed;bottom:2rem;right:1.5rem;width:54px;height:54px;background:var(--gold);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:9000;box-shadow:0 4px 16px rgba(198,169,122,.45);transition:all .3s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+#chat-btn:hover{background:var(--dark-sand);transform:translateY(-2px);box-shadow:0 6px 20px rgba(198,169,122,.55);}
+#chat-btn svg{width:24px;height:24px;fill:white;}
+.chat-badge{position:absolute;top:-4px;right:-4px;width:18px;height:18px;background:#e74c3c;color:white;border-radius:50%;font-size:.65rem;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:600;border:2px solid var(--warm-white);}
+#chat-window{position:fixed;bottom:5.5rem;right:1.5rem;width:340px;max-height:520px;background:white;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;z-index:8999;border:1px solid rgba(198,169,122,.2);}
+#chat-window.open{display:flex;}
+.chat-header{background:var(--charcoal);padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem;flex-shrink:0;}
+.chat-avatar{width:36px;height:36px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:white;font-weight:500;flex-shrink:0;}
+.chat-header-info{flex:1;}
+.chat-name{font-size:.8rem;font-weight:500;color:white;font-family:'Poppins',sans-serif;}
+.chat-status{font-size:.68rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.3rem;margin-top:2px;}
+.chat-status-dot{width:7px;height:7px;background:#2ecc71;border-radius:50%;display:inline-block;flex-shrink:0;}
+.chat-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1rem;cursor:pointer;padding:4px;line-height:1;transition:color .2s;}
+.chat-close:hover{color:white;}
+.chat-messages{flex:1;overflow-y:auto;padding:.8rem 1rem;display:flex;flex-direction:column;gap:.5rem;min-height:120px;max-height:260px;}
+.msg{max-width:82%;padding:.6rem .85rem;border-radius:12px;font-size:.8rem;line-height:1.5;font-family:'Poppins',sans-serif;word-wrap:break-word;}
+.msg.bot{background:var(--cream);color:var(--charcoal);align-self:flex-start;border-radius:4px 12px 12px 12px;}
+.msg.user{background:var(--gold);color:white;align-self:flex-end;border-radius:12px 4px 12px 12px;}
+.typing-dots{display:flex;gap:4px;align-items:center;padding:2px 0;}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.5;animation:typingBounce 1.4s ease infinite;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes typingBounce{0%,80%,100%{opacity:.3;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
+.chat-suggestions{padding:.5rem .8rem;display:flex;gap:.4rem;flex-wrap:wrap;border-top:1px solid rgba(0,0,0,.06);flex-shrink:0;}
+.sug-btn{background:var(--cream);border:1px solid var(--sand);color:var(--charcoal);padding:5px 10px;border-radius:20px;font-size:.68rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s;white-space:nowrap;touch-action:manipulation;}
+.sug-btn:hover{background:var(--gold);border-color:var(--gold);color:white;}
+.chat-input-row{display:flex;padding:.7rem .8rem;border-top:1px solid rgba(0,0,0,.06);flex-shrink:0;align-items:center;}
+.chat-input{flex:1;border:1px solid var(--sand);background:var(--warm-white);padding:8px 12px;font-size:.8rem;font-family:'Poppins',sans-serif;outline:none;color:var(--charcoal);border-radius:20px 0 0 20px;transition:border-color .2s;}
+.chat-input:focus{border-color:var(--gold);}
+.chat-input::placeholder{color:#bbb;}
+.chat-send{background:var(--gold);border:1px solid var(--gold);color:white;width:36px;height:36px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;border-radius:0 20px 20px 0;transition:background .2s;flex-shrink:0;}
+.chat-send:hover{background:var(--dark-sand);border-color:var(--dark-sand);}
+/* ── TABLET ── */
+@media(max-width:1024px){
+  .features-grid{grid-template-columns:1fr 1fr;}
+  .features-grid .feature-card:last-child{grid-column:1/-1;height:380px;}
+  .testimonials-grid{grid-template-columns:1fr 1fr;}
+  .activities-grid--3{grid-template-columns:1fr 1fr;}
+  .rates-grid{grid-template-columns:1fr 1fr;}
+  .booking-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .gallery-page-masonry{columns:3;}
+  section{padding:5rem 5%;}
+}
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  nav{height:52px;padding:0 4%;background:rgba(249,246,242,.98)!important;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(198,169,122,.25);}
+  .nav-logo{color:var(--charcoal)!important;font-size:.95rem;}
+  body{padding-bottom:0;}
+  section{padding:2.5rem 4%;}
+  
+  
+  .hero{height:65vh;height:65dvh;min-height:400px;}
+  .hero-eyebrow{font-size:.6rem;margin-bottom:1rem;}
+  .hero-title{font-size:clamp(1.7rem,7vw,2.5rem);line-height:1.15;margin-bottom:1rem;}
+  .hero-subtitle{font-size:.8rem;margin-bottom:1.8rem;}
+  .hero-btns{flex-direction:column;align-items:center;gap:.7rem;}
+  .btn-primary,.btn-outline{width:100%;max-width:260px;font-size:.68rem;padding:12px 24px;}
+  .hero-dots,.hero-scroll{display:none;}
+  .about-strip{grid-template-columns:1fr;gap:0;padding:0;}
+  .about-img-wrap{min-height:220px;}.about-img-wrap img{height:220px;}
+  .about-text{padding:2rem 4%;}.about-text .section-title{font-size:1.5rem;}
+  .stats-row{gap:1.5rem;}.stat .n{font-size:1.4rem;}
+  .section-title{font-size:1.4rem!important;}
+  .section-eyebrow{font-size:.6rem;}.section-body{font-size:.82rem;}
+  .features-grid{grid-template-columns:1fr;}.feature-card{height:260px;}
+  .feature-content{padding:1.5rem;}.feature-content h3{font-size:1.1rem;}.feature-content p{font-size:.75rem;}
+  .masonry{columns:2;column-gap:.5rem;}.gallery-section{padding:2.5rem 4%;}
+  .gallery-page-masonry{columns:2;column-gap:.5rem;padding:0 3% 2.5rem;}
+  .gal-filter{padding:1.5rem 4%;gap:.5rem;}.gal-btn{padding:8px 14px;font-size:.65rem;}
+  .testimonials{padding:2.5rem 4%;}.testimonials-grid{grid-template-columns:1fr;gap:1rem;}
+  .testimonial-card{padding:1.5rem;}.testimonial-card p{font-size:.8rem;}
+  .cta-banner{padding:3rem 4%;}.cta-banner::before{display:none;}
+  .page-hero{height:38vh;min-height:240px;padding:3%;}
+  .page-title{font-size:1.6rem;}.page-eyebrow{font-size:.58rem;}
+  .villa-grid{grid-template-columns:1fr;gap:1.5rem;}
+  .spec-box{padding:.8rem 1rem;}.spec-box .spec-num{font-size:1.4rem;}
+  .amenity-list{grid-template-columns:1fr 1fr;gap:.5rem;}
+  .amenity-item{font-size:.75rem;padding:.6rem;}
+  .room-gallery{height:auto;grid-template-columns:1fr;grid-template-rows:200px 130px 130px;gap:.5rem;}
+  .room-img:first-child{grid-row:auto;}
+  .activities-grid{grid-template-columns:1fr;gap:1rem;}.activities-grid--3{grid-template-columns:1fr;}
+  .activity-card--rich .activity-card-img{height:160px;}
+  .activity-card-body h3{font-size:.95rem;}
+  .usp-grid{grid-template-columns:1fr;gap:1rem;}.usp-card{padding:1.5rem;}
+  .lifestyle-section{padding:3rem 4%;}.lifestyle-quote{font-size:1.1rem;}
+  .rates-grid{grid-template-columns:1fr;gap:1rem;}.rate-card{padding:1.5rem;}.rate-price{font-size:2rem;}
+  .addons-grid{grid-template-columns:1fr 1fr;gap:.7rem;}
+  .booking-form-section{padding:2.5rem 4%;}.booking-grid{grid-template-columns:1fr;gap:2rem;}
+  .form-row{grid-template-columns:1fr;}
+  .contact-section{padding:2.5rem 4%;}.contact-grid{grid-template-columns:1fr;gap:2rem;}
+  .map-container{height:240px;margin-top:1.5rem;}.contact-form-box{padding:1.5rem;}
+  .contact-item{gap:.8rem;margin-top:1.2rem;padding-bottom:1rem;}
+  .footer-inner{grid-template-columns:1fr;gap:1.5rem;padding:2rem 4% 0;}
+  .footer-brand-logo{font-size:1.2rem;}.footer-brand-desc{font-size:.72rem;}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.25rem;padding:.8rem 4%;}
+  #chat-btn{bottom:calc(64px + env(safe-area-inset-bottom,0px) + 1rem);right:1rem;width:48px;height:48px;}
+  #chat-btn svg{width:20px;height:20px;}
+  #chat-window{width:calc(100vw - 1.5rem);right:.75rem;left:.75rem;bottom:calc(64px + env(safe-area-inset-bottom,0px) + 4rem);max-height:55vh;border-radius:12px;}
+  .lb-nav{width:38px;height:38px;font-size:1.5rem;}
+}
+/* ── SMALL PHONES ── */
+@media(max-width:380px){
+  .hero{height:60vh;height:60dvh;}
+  .hero-title{font-size:1.5rem;}
+  .section-title{font-size:1.25rem!important;}
+  .amenity-list{grid-template-columns:1fr;}
+  .activities-grid{grid-template-columns:1fr;}
+  .masonry{columns:1;}.gallery-page-masonry{columns:1;}
+  .addons-grid{grid-template-columns:1fr;}
+  .rate-price{font-size:1.8rem;}
+}
+/* ── LANDSCAPE PHONES ── */
+@media(max-width:768px) and (orientation:landscape){
+  .hero{height:85vw;min-height:280px;}
+  body{padding-bottom:52px;}
+  
+  #chat-btn{bottom:4rem;}
+  #chat-window{max-height:65vh;bottom:4.5rem;}
+}
+/* ── HAMBURGER & MOBILE MENU ── */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:1001;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--warm-white);border-radius:2px;transition:all .3s ease;}
+nav.scrolled .hamburger span{background:var(--charcoal);}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu-overlay{display:none;position:fixed;inset:0;background:rgba(30,25,20,.5);z-index:1100;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}
+.mobile-menu-overlay.open{display:block;}
+.mobile-menu{position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100%;background:var(--charcoal);z-index:1200;display:flex;flex-direction:column;padding:2rem 1.8rem;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.mobile-menu.open{right:0;}
+.mobile-menu-close{align-self:flex-end;background:none;border:none;color:rgba(255,255,255,.5);font-size:1.3rem;cursor:pointer;margin-bottom:2rem;touch-action:manipulation;}
+.mobile-menu-close:hover{color:white;}
+.mobile-menu-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--sand);margin-bottom:.3rem;}
+.mobile-menu-tagline{font-size:.6rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(198,169,122,.2);}
+.mobile-nav-links{list-style:none;margin-bottom:2rem;}
+.mobile-nav-links li{border-bottom:1px solid rgba(255,255,255,.06);}
+.mobile-nav-links a{display:block;padding:.9rem 0;font-size:.9rem;color:rgba(255,255,255,.7);text-decoration:none;letter-spacing:.05em;transition:color .2s;touch-action:manipulation;}
+.mobile-nav-links a:hover,.mobile-nav-links a:active{color:var(--gold);}
+.mobile-menu-cta{display:block;text-align:center;background:var(--gold);color:white;padding:14px;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border-radius:2px;margin-bottom:2rem;touch-action:manipulation;}
+.mobile-menu-footer{margin-top:auto;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);}
+.mobile-menu-footer p{font-size:.72rem;color:rgba(255,255,255,.35);margin-bottom:.4rem;}
+.mobile-menu-socials{display:flex;gap:1rem;margin-top:.8rem;}
+.mobile-menu-socials a{font-size:.68rem;color:var(--gold);text-decoration:none;letter-spacing:.1em;}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{display:none;}
+  nav{height:56px;padding:0 4%;background:rgba(249,246,242,.97)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(198,169,122,.2);}
+  nav.scrolled .hamburger span, .hamburger span{background:var(--charcoal);}
+  .nav-logo{color:var(--charcoal)!important;font-size:1rem;}
+  body{padding-bottom:0;}
+  section{padding:2.5rem 4%;}
+  .hero{height:65vh;height:65dvh;min-height:400px;}
+  .hero-eyebrow{font-size:.6rem;margin-bottom:1rem;}
+  .hero-title{font-size:clamp(1.7rem,7vw,2.5rem);line-height:1.15;margin-bottom:1rem;}
+  .hero-subtitle{font-size:.8rem;margin-bottom:1.8rem;}
+  .hero-btns{flex-direction:column;align-items:center;gap:.7rem;}
+  .btn-primary,.btn-outline{width:100%;max-width:260px;font-size:.68rem;padding:12px 24px;}
+  .hero-dots,.hero-scroll{display:none;}
+  .about-strip{grid-template-columns:1fr;gap:0;padding:0;}
+  .about-img-wrap{min-height:220px;}.about-img-wrap img{height:220px;}
+  .about-text{padding:2rem 4%;}
+  .stats-row{gap:1.5rem;flex-wrap:wrap;}.stat .n{font-size:1.4rem;}
+  .section-title{font-size:1.5rem!important;}
+  .section-eyebrow{font-size:.6rem;}.section-body{font-size:.85rem;}
+  .features-grid{grid-template-columns:1fr;}.feature-card{height:280px;}
+  .feature-content{padding:1.5rem;}
+  .masonry{columns:2;column-gap:.5rem;}
+  .gallery-section{padding:2.5rem 4%;}
+  .gallery-page-masonry{columns:2;column-gap:.5rem;padding:0 4% 2.5rem;}
+  .gal-filter{padding:1.5rem 4%;gap:.5rem;}.gal-btn{padding:8px 14px;font-size:.65rem;}
+  .testimonials{padding:2.5rem 4%;}.testimonials-grid{grid-template-columns:1fr;gap:1rem;}
+  .testimonial-card{padding:1.5rem;}
+  .cta-banner{padding:3rem 4%;}.cta-banner::before{display:none;}
+  .page-hero{height:40vh;min-height:260px;padding:4%;}
+  .page-title{font-size:1.8rem;}.page-eyebrow{font-size:.6rem;}
+  .villa-grid{grid-template-columns:1fr;gap:1.5rem;}
+  .villa-specs{gap:.8rem;flex-wrap:wrap;}
+  .spec-box{padding:.8rem 1rem;flex:1;min-width:80px;}
+  .amenity-list{grid-template-columns:1fr 1fr;gap:.5rem;}
+  .amenity-item{font-size:.78rem;padding:.6rem;}
+  .room-gallery{height:auto;grid-template-columns:1fr;grid-template-rows:220px 140px 140px;gap:.5rem;}
+  .room-img:first-child{grid-row:auto;}
+  .activities-grid{grid-template-columns:1fr;gap:1rem;}
+  .activities-grid--3{grid-template-columns:1fr;gap:1rem;}
+  .activity-card--rich .activity-card-img{height:170px;}
+  .usp-grid{grid-template-columns:1fr;gap:1rem;}.usp-card{padding:1.5rem;}
+  .lifestyle-section{padding:3rem 4%;}.lifestyle-quote{font-size:1.15rem;}
+  .rates-grid{grid-template-columns:1fr;gap:1rem;}.rate-card{padding:1.5rem;}
+  .rate-price{font-size:2rem;}.addons-grid{grid-template-columns:1fr 1fr;gap:.7rem;}
+  .booking-form-section{padding:2.5rem 4%;}.booking-grid{grid-template-columns:1fr;gap:2rem;}
+  .form-row{grid-template-columns:1fr;}
+  .contact-section{padding:2.5rem 4%;}.contact-grid{grid-template-columns:1fr;gap:2rem;}
+  .map-container{height:250px;margin-top:1.5rem;}.contact-form-box{padding:1.5rem;}
+  .contact-item{margin-top:1.2rem;padding-bottom:1rem;}
+  .footer-inner{grid-template-columns:1fr;gap:1.5rem;padding:2rem 4% 0;}
+  .footer-brand-logo{font-size:1.2rem;}.footer-brand-desc{font-size:.75rem;}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.25rem;padding:.8rem 4%;}
+  #chat-btn{bottom:1.5rem;right:1rem;width:50px;height:50px;}
+  #chat-btn svg{width:22px;height:22px;}
+  #chat-window{width:calc(100vw - 1.5rem);right:.75rem;left:.75rem;bottom:5rem;max-height:60vh;border-radius:12px;}
+}
+@media(max-width:380px){
+  .hero{height:60vh;height:60dvh;}
+  .hero-title{font-size:1.5rem;}
+  .section-title{font-size:1.3rem!important;}
+  .amenity-list{grid-template-columns:1fr;}
+  .masonry{columns:1;}.gallery-page-masonry{columns:1;}
+  .addons-grid{grid-template-columns:1fr;}
+  .rate-price{font-size:1.8rem;}
+  .mobile-menu{width:88%;}
+}
+@media(max-width:768px) and (orientation:landscape){
+  .hero{height:90vw;min-height:280px;}
+  #chat-btn{bottom:1.2rem;}
+  #chat-window{max-height:70vh;bottom:4.5rem;}
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="wave">🌊</div>
-    <h1>Private Beachfront</h1>
-    <p>Welcome to your exclusive beachfront retreat. Sit back, relax, and enjoy the view.</p>
+<div id="loader"><div class="loader-text">The Resthouse Laiya</div><div class="loader-line"></div><div class="loader-sub">Private Beachfront Estate · Laiya, San Juan</div></div>
+<div id="lightbox"><button class="lb-close" onclick="closeLB()">✕</button><button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button><img id="lb-img" src="" alt=""><button class="lb-nav lb-next" onclick="lbNav(1)">›</button></div>
+<nav id="navbar">
+  <a class="nav-logo" href="javascript:void(0)" onclick="showPage('home')">The Resthouse Laiya</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('villas')">Villas</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('rates')">Rates</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li>
+    <li><a class="nav-cta" href="javascript:void(0)" onclick="showPage('rates')">Book Now</a></li>
+  </ul>
+</nav>
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMenu()">&#x2715;</button>
+  <div class="mobile-menu-logo">The Resthouse Laiya</div>
+  <div class="mobile-menu-tagline">Private Beachfront Estate</div>
+  <ul class="mobile-nav-links">
+    <li><a href="javascript:void(0)" onclick="showPage('home');toggleMenu()">Home</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('villas');toggleMenu()">The Villa</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('experience');toggleMenu()">Experience</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('gallery');toggleMenu()">Gallery</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('rates');toggleMenu()">Rates</a></li>
+    <li><a href="javascript:void(0)" onclick="showPage('contact');toggleMenu()">Contact</a></li>
+  </ul>
+  <a href="javascript:void(0)" onclick="showPage('rates');toggleMenu();" class="mobile-menu-cta">Book Now</a>
+  <div class="mobile-menu-footer">
+    <p>+63 9XX XXX XXXX</p>
+    <p>inquiries@resthouselaya.com</p>
+    <div class="mobile-menu-socials">
+      <a href="https://www.facebook.com/resthouselaya" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/resthouselaya" target="_blank">Instagram</a>
+    </div>
   </div>
+</div>
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80" alt="Laiya white sand beach"></div>
+      <div class="hero-slide"><img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1920&q=80" alt="Tropical shoreline"></div>
+      <div class="hero-slide"><img src="https://images.unsplash.com/photo-1470290378698-263fa7ca60ab?w=1920&q=80" alt="Beachfront sunset"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Laiya, San Juan · Batangas</div>
+      <h1 class="hero-title">Your Private<br><em>Escape in Laiya</em></h1>
+      <p class="hero-subtitle">A 9-hectare beachfront sanctuary — where peace is the only agenda.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('rates')">Book Your Stay</button>
+        <button class="btn-outline" onclick="showPage('villas')">View the Villa</button>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+    <div class="hero-dots">
+      <div class="hero-dot active" onclick="goSlide(0)"></div>
+      <div class="hero-dot" onclick="goSlide(1)"></div>
+      <div class="hero-dot" onclick="goSlide(2)"></div>
+    </div>
+  </section>
+  <div class="about-strip">
+    <div class="about-img-wrap">
+      <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=900&q=80" alt="Resort villa pool">
+      <div class="about-img-badge"><span class="num">9</span><span class="lbl">Hectares Private</span></div>
+    </div>
+    <div class="about-text">
+      <span class="section-eyebrow">Our Story</span>
+      <h2 class="section-title">A Hidden Paradise,<br><em>Far from the Noise</em></h2>
+      <div class="divider"></div>
+      <p class="section-body">The Resthouse Laiya is not just a place to stay — it's a place to breathe. Nestled on a private 9-hectare beachfront estate in Laiya, San Juan, Batangas, we offer what few resorts can: genuine solitude, uncrowded white sand, and the kind of stillness that resets the soul.</p>
+      <p class="section-body" style="margin-top:1rem;">No strangers. No crowds. Just your family, your friends, and the sound of the sea. Watch sea turtles nest at dusk. Wake up to birds you've never heard before. This is Laiya, done differently.</p>
+      <div class="stats-row">
+        <div class="stat"><div class="n">9ha</div><div class="l">Private Estate</div></div>
+        <div class="stat"><div class="n">8+</div><div class="l">Guests Max</div></div>
+        <div class="stat"><div class="n">100m</div><div class="l">Beach Frontage</div></div>
+      </div>
+    </div>
+  </div>
+  <section style="padding:0;">
+    <div class="features-grid">
+      <div class="feature-card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Private beach"><div class="feature-overlay"></div><div class="feature-content"><div class="feature-icon">🏖️</div><h3>Your Private Beach</h3><p>A long stretch of powdery white sand, reserved exclusively for your group. No strangers, no noise — just the gentle lap of Laiya's calm waters.</p></div></div>
+      <div class="feature-card"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80" alt="Villa interior"><div class="feature-overlay"></div><div class="feature-content"><div class="feature-icon">🏡</div><h3>Exclusive Villa Stay</h3><p>Two bedrooms, three bathrooms, a full kitchen, and living spaces designed for real relaxation. The entire estate is yours — no check-in queues, no shared spaces.</p></div></div>
+      <div class="feature-card"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=800&q=80" alt="Nature and sunset"><div class="feature-overlay"></div><div class="feature-content"><div class="feature-icon">🌿</div><h3>Nature & Serenity</h3><p>A turtle nesting sanctuary. A bird watcher's dream. Sunsets that turn the sea gold. This is Laiya the way it was meant to be experienced.</p></div></div>
+    </div>
+  </section>
+  <section class="gallery-section">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <span class="section-eyebrow">Visual Stories</span>
+      <h2 class="section-title">Life at <em>The Resthouse</em></h2>
+    </div>
+    <div class="masonry" style="margin-top:3rem;">
+      <div class="masonry-item" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Beach"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+      <div class="masonry-item" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80" alt="Nature"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+      <div class="masonry-item" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1531761535209-180857e963b9?w=600&q=80" alt="Hammock"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+      <div class="masonry-item" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1470290378698-263fa7ca60ab?w=600&q=80" alt="Sunset"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><button class="btn-primary" onclick="showPage('gallery')">View Full Gallery</button></div>
+  </section>
+  <section class="testimonials">
+    <div style="text-align:center;"><span class="section-eyebrow">Guest Stories</span><h2 class="section-title">What Our Guests <em>Say</em></h2></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="quote-mark">"</div><div class="stars">★★★★★</div><p>A hidden paradise away from the city. We arrived stressed and left completely restored. The beach is unreal — absolutely pristine. We didn't want to leave.</p><div class="testimonial-author"><div class="author-avatar">MA</div><div class="author-info"><div class="name">Maria A.</div><div class="title">Family Stay · Oct 2024</div></div></div></div>
+      <div class="testimonial-card"><div class="quote-mark">"</div><div class="stars">★★★★★</div><p>Perfect for a peaceful family getaway. Our kids spotted a sea turtle nesting — a moment we'll never forget. The space is generous, beautiful, and very private.</p><div class="testimonial-author"><div class="author-avatar">RC</div><div class="author-info"><div class="name">Ramon C.</div><div class="title">Group Stay · Dec 2024</div></div></div></div>
+      <div class="testimonial-card"><div class="quote-mark">"</div><div class="stars">★★★★★</div><p>We've been to many resorts in Laiya but nothing compares to this. The exclusivity is everything. Waking up to nothing but the sea sound is pure luxury.</p><div class="testimonial-author"><div class="author-avatar">JL</div><div class="author-info"><div class="name">Jenny L.</div><div class="title">Couple Retreat · Jan 2025</div></div></div></div>
+    </div>
+  </section>
+  <section class="cta-banner">
+    <span class="section-eyebrow">Reserve Your Escape</span>
+    <h2 class="section-title">Escape the noise.<br><em>Experience Laiya differently.</em></h2>
+    <p class="section-body">Limited dates available each month. Private bookings only — your group, your timeline, your peace.</p>
+    <div class="hero-btns" style="justify-content:center;margin-top:2.5rem;">
+      <button class="btn-primary" onclick="showPage('rates')">Check Availability</button>
+      <button class="btn-outline" style="border-color:var(--charcoal);color:var(--charcoal);" onclick="showPage('contact')">Send an Inquiry</button>
+    </div>
+  </section>
+  <footer><div class="footer-inner"><div><div class="footer-brand-logo">The Resthouse Laiya</div><div class="footer-brand-tagline">Private Beachfront Estate · Laiya, Batangas</div><p class="footer-brand-desc">A 9-hectare private sanctuary where the only crowd is yours, and the only agenda is peace.</p><div class="footer-social-row"><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">f</a><a class="footer-social-btn" href="https://www.instagram.com/resthouselaya" target="_blank">in</a><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">m</a></div></div><div><div class="footer-col-title">Navigate</div><ul class="footer-nav-links"><li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li><li><a href="javascript:void(0)" onclick="showPage('villas')">The Villa</a></li><li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li><li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li><li><a href="javascript:void(0)" onclick="showPage('rates')">Rates & Booking</a></li><li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li></ul></div><div><div class="footer-col-title">Get in Touch</div><div class="footer-contact-row"><span class="fci">📍</span><span class="fcv">Laiya, San Juan, Batangas, Philippines</span></div><div class="footer-contact-row"><span class="fci">📱</span><span class="fcv">+63 9XX XXX XXXX</span></div><div class="footer-contact-row"><span class="fci">📧</span><span class="fcv">inquiries@resthouselaya.com</span></div><div class="footer-contact-row"><span class="fci">🕐</span><span class="fcv">Check-in 2PM · Check-out 12NN</span></div><div class="footer-contact-row"><span class="fci">💬</span><span class="fcv"><a href="https://www.facebook.com/resthouselaya" target="_blank">Message on Facebook</a></span></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-left">© 2025 The Resthouse Laiya. All rights reserved.</div><div class="footer-bottom-right">Laiya · San Juan · Batangas · Philippines</div></div></footer>
+</div>
+<!-- VILLAS -->
+<div class="page" id="page-villas">
+  <div style="height:72px;"></div>
+  <div class="page-hero"><div class="page-bg-img"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1920&q=80" alt="Villa beachfront"></div><div class="hero-gradient"></div><div class="page-hero-content"><span class="page-eyebrow">Accommodation</span><h1 class="page-title">The Private Villa</h1></div></div>
+  <section>
+    <div class="villa-grid">
+      <div>
+        <span class="section-eyebrow">Your Exclusive Retreat</span>
+        <h2 class="section-title">A Home on the Beach,<br><em>All to Yourself</em></h2>
+        <div class="divider"></div>
+        <p class="section-body">The Resthouse Laiya is a fully private estate — not a room, not a shared resort. When you book, you have the entire property: the villa, the beach, the grounds, and complete privacy.</p>
+        <div class="villa-specs"><div class="spec-box"><span class="spec-num">2</span><span class="spec-lbl">Bedrooms</span></div><div class="spec-box"><span class="spec-num">3</span><span class="spec-lbl">Bathrooms</span></div><div class="spec-box"><span class="spec-num">8+</span><span class="spec-lbl">Guests</span></div><div class="spec-box"><span class="spec-num">9ha</span><span class="spec-lbl">Estate</span></div></div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin:2.5rem 0 1rem;font-weight:400;">Amenities</h3>
+        <div class="amenity-list">
+          <div class="amenity-item"><span class="amenity-icon">🌊</span>Beachfront Access</div><div class="amenity-item"><span class="amenity-icon">🏖️</span>Private Beach Area</div>
+          <div class="amenity-item"><span class="amenity-icon">🍳</span>Full Kitchen</div><div class="amenity-item"><span class="amenity-icon">📺</span>Living Room</div>
+          <div class="amenity-item"><span class="amenity-icon">❄️</span>Air Conditioning</div><div class="amenity-item"><span class="amenity-icon">📶</span>Free WiFi</div>
+          <div class="amenity-item"><span class="amenity-icon">🚗</span>Free Parking</div><div class="amenity-item"><span class="amenity-icon">🐾</span>Pet Friendly</div>
+          <div class="amenity-item"><span class="amenity-icon">🛋️</span>Sofa Beds</div><div class="amenity-item"><span class="amenity-icon">🍽️</span>Dining Area</div>
+        </div>
+      </div>
+      <div><div class="room-gallery"><div class="room-img"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80" alt="Villa exterior"><div class="room-label">Beach Villa</div></div><div class="room-img"><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&q=80" alt="Bedroom"><div class="room-label">Bedroom</div></div><div class="room-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80" alt="Kitchen"><div class="room-label">Kitchen</div></div></div></div>
+    </div>
+  </section>
+  <section style="background:var(--cream);padding:6rem 5%;">
+    <span class="section-eyebrow">The Layout</span><h2 class="section-title">Designed for <em>Real Comfort</em></h2>
+    <div class="usp-grid"><div class="usp-card"><h3>🛏️ Bedrooms</h3><p>Two spacious bedrooms with quality beds, fresh linens, and air conditioning. Wake up to sea breeze through the windows.</p></div><div class="usp-card"><h3>🛋️ Living Room</h3><p>A generous living area with comfortable sofa beds — perfect for families or groups who need extra sleeping space.</p></div><div class="usp-card"><h3>🍳 Kitchen & Dining</h3><p>A fully equipped kitchen lets you cook your own meals, host barbecue sessions, or enjoy home-cooked dinners by the beach.</p></div></div>
+  </section>
+  <section class="cta-banner"><span class="section-eyebrow">Ready to Stay?</span><h2 class="section-title">Reserve the <em>Entire Estate</em></h2><p class="section-body" style="max-width:450px;margin:0 auto 2.5rem;">Check rates and send a booking inquiry. We'll get back to you within 24 hours.</p><div class="hero-btns" style="justify-content:center;"><button class="btn-primary" onclick="showPage('rates')">View Rates & Book</button><button class="btn-outline" style="border-color:var(--charcoal);color:var(--charcoal);" onclick="showPage('contact')">Ask a Question</button></div></section>
+  <footer><div class="footer-inner"><div><div class="footer-brand-logo">The Resthouse Laiya</div><div class="footer-brand-tagline">Private Beachfront Estate · Laiya, Batangas</div><p class="footer-brand-desc">A 9-hectare private sanctuary where the only crowd is yours, and the only agenda is peace.</p><div class="footer-social-row"><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">f</a><a class="footer-social-btn" href="https://www.instagram.com/resthouselaya" target="_blank">in</a><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">m</a></div></div><div><div class="footer-col-title">Navigate</div><ul class="footer-nav-links"><li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li><li><a href="javascript:void(0)" onclick="showPage('villas')">The Villa</a></li><li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li><li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li><li><a href="javascript:void(0)" onclick="showPage('rates')">Rates & Booking</a></li><li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li></ul></div><div><div class="footer-col-title">Get in Touch</div><div class="footer-contact-row"><span class="fci">📍</span><span class="fcv">Laiya, San Juan, Batangas, Philippines</span></div><div class="footer-contact-row"><span class="fci">📱</span><span class="fcv">+63 9XX XXX XXXX</span></div><div class="footer-contact-row"><span class="fci">📧</span><span class="fcv">inquiries@resthouselaya.com</span></div><div class="footer-contact-row"><span class="fci">🕐</span><span class="fcv">Check-in 2PM · Check-out 12NN</span></div><div class="footer-contact-row"><span class="fci">💬</span><span class="fcv"><a href="https://www.facebook.com/resthouselaya" target="_blank">Message on Facebook</a></span></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-left">© 2025 The Resthouse Laiya. All rights reserved.</div><div class="footer-bottom-right">Laiya · San Juan · Batangas · Philippines</div></div></footer>
+</div>
+<!-- EXPERIENCE -->
+<div class="page" id="page-experience">
+  <div style="height:72px;"></div>
+  <div class="page-hero"><div class="page-bg-img"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1920&q=80" alt="Nature experience"></div><div class="hero-gradient"></div><div class="page-hero-content"><span class="page-eyebrow">The Experience</span><h1 class="page-title">Live Slowly.<br>Feel Everything.</h1></div></div>
+  <section>
+    <div style="max-width:620px;"><span class="section-eyebrow">Activities</span><h2 class="section-title">Discover What Laiya<br><em>Has to Offer</em></h2><p class="section-body">From the calm of your private beach to the thrill of nearby adventures — Laiya has a pace for every kind of guest.</p></div>
+    <div style="margin-top:3rem;"><div class="act-group-label"><span class="act-badge act-badge--estate">At The Resthouse</span><div class="act-group-line"></div></div>
+    <div class="activities-grid activities-grid--3">
+      <div class="activity-card activity-card--rich"><div class="activity-card-img"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Private beach"></div><div class="activity-card-body"><div class="activity-emoji">🏖️</div><h3>Private Beach & Swimming</h3><p>Your own stretch of Laiya's white sand — no strangers, no vendors. Kayak, float, or simply do nothing at all.</p></div></div>
+      <div class="activity-card activity-card--rich"><div class="activity-card-img"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80" alt="Bird watching"></div><div class="activity-card-body"><div class="activity-emoji">🦜</div><h3>Bird Watching & Turtle Nesting</h3><p>Spot kingfishers, herons, and bee-eaters. At dusk, witness sea turtles nesting — one of Laiya's rarest gifts.</p></div></div>
+      <div class="activity-card activity-card--rich"><div class="activity-card-img"><img src="https://images.unsplash.com/photo-1470290378698-263fa7ca60ab?w=600&q=80" alt="Sunset bonfire"></div><div class="activity-card-body"><div class="activity-emoji">🌅</div><h3>Sunrise Paddles & Sunset Bonfires</h3><p>Kayak at golden hour. End the day with a beach bonfire — Laiya sunsets are a masterpiece every evening.</p></div></div>
+    </div></div>
+    <div style="margin-top:3rem;"><div class="act-group-label"><span class="act-badge act-badge--nearby">Nearby Laiya</span><div class="act-group-line"></div></div>
+    <div class="activities-grid activities-grid--3">
+      <div class="activity-card activity-card--rich"><div class="activity-card-img"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Adventure park"></div><div class="activity-card-body"><div class="activity-emoji">🪂</div><h3>Laiya Adventure Park</h3><p>Zipline, ATV rides, wall climbing, giant swing, and free fall set inside a jungle-clad hill.</p><span class="act-tag">~10 min drive</span></div></div>
+      <div class="activity-card activity-card--rich"><div class="activity-card-img"><img src="https://images.unsplash.com/photo-1468581264429-2548ef9eb732?w=600&q=80" alt="Catamaran tour"></div><div class="activity-card-body"><div class="activity-emoji">⛵</div><h3>Catamaran & Mangrove Tours</h3><p>Charter a catamaran for a full-day bay tour with snorkeling. Or take a motorized outrigger through mangrove rivers.</p><span class="act-tag">Arrangeable</span></div></div>
+      <div class="activity-card activity-card--rich"><div class="activity-card-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Local food"></div><div class="activity-card-body"><div class="activity-emoji">☕</div><h3>Laiya Food & Culture Trail</h3><p>Try <em>lomi</em>, <em>bulalo</em>, Batangas <em>kapeng barako</em>, and coconut <em>lambanog</em> — a short drive opens a full local food trail.</p><span class="act-tag">~15 min drive</span></div></div>
+    </div></div>
+  </section>
+  <div class="lifestyle-section"><div class="lifestyle-quote">Wake up to waves, take your coffee with the birds, sleep with the sound of nature — and do it all over again.</div><div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;"><button class="btn-outline" onclick="showPage('rates')">Plan Your Stay →</button></div></div>
+  <section style="background:var(--cream);"><span class="section-eyebrow">What Makes Us Different</span><h2 class="section-title">Only at <em>The Resthouse</em></h2><div class="usp-grid"><div class="usp-card"><h3>🐚 Long, Uncrowded Beach</h3><p>Our private coastline sees no day-trippers. The beach is yours from sunrise to the stars.</p></div><div class="usp-card"><h3>🐢 Turtle Nesting Sanctuary</h3><p>The estate borders an active sea turtle nesting area — something most people never witness in their lifetime.</p></div><div class="usp-card"><h3>🌿 Total Ecological Peace</h3><p>No generators. No DJ sets. Just wind, water, birds, and the silence that only a private estate can protect.</p></div></div></section>
+  <footer><div class="footer-inner"><div><div class="footer-brand-logo">The Resthouse Laiya</div><div class="footer-brand-tagline">Private Beachfront Estate · Laiya, Batangas</div><p class="footer-brand-desc">A 9-hectare private sanctuary where the only crowd is yours, and the only agenda is peace.</p><div class="footer-social-row"><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">f</a><a class="footer-social-btn" href="https://www.instagram.com/resthouselaya" target="_blank">in</a><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">m</a></div></div><div><div class="footer-col-title">Navigate</div><ul class="footer-nav-links"><li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li><li><a href="javascript:void(0)" onclick="showPage('villas')">The Villa</a></li><li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li><li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li><li><a href="javascript:void(0)" onclick="showPage('rates')">Rates & Booking</a></li><li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li></ul></div><div><div class="footer-col-title">Get in Touch</div><div class="footer-contact-row"><span class="fci">📍</span><span class="fcv">Laiya, San Juan, Batangas, Philippines</span></div><div class="footer-contact-row"><span class="fci">📱</span><span class="fcv">+63 9XX XXX XXXX</span></div><div class="footer-contact-row"><span class="fci">📧</span><span class="fcv">inquiries@resthouselaya.com</span></div><div class="footer-contact-row"><span class="fci">🕐</span><span class="fcv">Check-in 2PM · Check-out 12NN</span></div><div class="footer-contact-row"><span class="fci">💬</span><span class="fcv"><a href="https://www.facebook.com/resthouselaya" target="_blank">Message on Facebook</a></span></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-left">© 2025 The Resthouse Laiya. All rights reserved.</div><div class="footer-bottom-right">Laiya · San Juan · Batangas · Philippines</div></div></footer>
+</div>
+<!-- GALLERY -->
+<div class="page" id="page-gallery">
+  <div style="height:72px;background:var(--charcoal);"></div>
+  <section style="background:var(--charcoal);padding:3rem 5% 2rem;text-align:center;"><span class="section-eyebrow" style="color:var(--gold);">Photography</span><h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--sand);font-weight:400;">The <em style="color:var(--gold);">Resthouse</em> Gallery</h1></section>
+  <div style="background:var(--charcoal);padding:0 5% 1rem;"><div class="gal-filter"><button class="gal-btn active" onclick="filterGal(this,'all')">All</button><button class="gal-btn" onclick="filterGal(this,'beach')">Beach</button><button class="gal-btn" onclick="filterGal(this,'villa')">Villa</button><button class="gal-btn" onclick="filterGal(this,'interior')">Interiors</button><button class="gal-btn" onclick="filterGal(this,'sunset')">Sunset</button></div></div>
+  <div class="gallery-page-masonry" id="galGrid" style="margin-top:1.5rem;">
+    <!-- BEACH -->
+    <div class="masonry-item" data-cat="beach" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="White sand beach"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <div class="masonry-item" data-cat="beach" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=600&q=80" alt="Tropical shoreline"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <div class="masonry-item" data-cat="beach" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1439405326854-014607f694d7?w=600&q=80" alt="Calm sea"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <!-- VILLA -->
+    <div class="masonry-item" data-cat="villa" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&q=80" alt="Beachfront villa"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <div class="masonry-item" data-cat="villa" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80" alt="Villa pool"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <!-- INTERIORS -->
+    <div class="masonry-item" data-cat="interior" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80" alt="Bedroom"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <!-- SUNSET -->
+    <div class="masonry-item" data-cat="sunset" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1470290378698-263fa7ca60ab?w=600&q=80" alt="Laiya sunset"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+    <div class="masonry-item" data-cat="sunset" onclick="openLB(this)"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80" alt="Golden hour"><div class="masonry-overlay"><div class="zoom-icon">+</div></div></div>
+  </div>
+  <section class="cta-banner" style="margin-top:3rem;"><h2 class="section-title">Become Part of the <em>Story</em></h2><p class="section-body" style="max-width:440px;margin:0 auto 2.5rem;">Book your stay and create your own memories at The Resthouse Laiya.</p><button class="btn-primary" onclick="showPage('rates')">Book Now</button></section>
+  <footer><div class="footer-inner"><div><div class="footer-brand-logo">The Resthouse Laiya</div><div class="footer-brand-tagline">Private Beachfront Estate · Laiya, Batangas</div><p class="footer-brand-desc">A 9-hectare private sanctuary where the only crowd is yours, and the only agenda is peace.</p><div class="footer-social-row"><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">f</a><a class="footer-social-btn" href="https://www.instagram.com/resthouselaya" target="_blank">in</a><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">m</a></div></div><div><div class="footer-col-title">Navigate</div><ul class="footer-nav-links"><li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li><li><a href="javascript:void(0)" onclick="showPage('villas')">The Villa</a></li><li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li><li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li><li><a href="javascript:void(0)" onclick="showPage('rates')">Rates & Booking</a></li><li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li></ul></div><div><div class="footer-col-title">Get in Touch</div><div class="footer-contact-row"><span class="fci">📍</span><span class="fcv">Laiya, San Juan, Batangas, Philippines</span></div><div class="footer-contact-row"><span class="fci">📱</span><span class="fcv">+63 9XX XXX XXXX</span></div><div class="footer-contact-row"><span class="fci">📧</span><span class="fcv">inquiries@resthouselaya.com</span></div><div class="footer-contact-row"><span class="fci">🕐</span><span class="fcv">Check-in 2PM · Check-out 12NN</span></div><div class="footer-contact-row"><span class="fci">💬</span><span class="fcv"><a href="https://www.facebook.com/resthouselaya" target="_blank">Message on Facebook</a></span></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-left">© 2025 The Resthouse Laiya. All rights reserved.</div><div class="footer-bottom-right">Laiya · San Juan · Batangas · Philippines</div></div></footer>
+</div>
+<!-- RATES -->
+<div class="page" id="page-rates">
+  <div style="height:72px;"></div>
+  <div class="page-hero"><div class="page-bg-img"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="Laiya beach rates"></div><div class="hero-gradient"></div><div class="page-hero-content"><span class="page-eyebrow">Rates & Booking</span><h1 class="page-title">Invest in <em>Real Rest</em></h1></div></div>
+  <section>
+    <span class="section-eyebrow">Pricing</span><h2 class="section-title">Choose Your <em>Stay</em></h2>
+    <p class="section-body" style="max-width:500px;">All rates are for exclusive use of the entire estate. No shared facilities, no strangers.</p>
+    <div class="rates-grid">
+      <div class="rate-card"><span class="rate-type">Weekday</span><div class="rate-price"><sup>₱</sup>12,000<span class="rate-per">/ night</span></div><div class="rate-divider"></div><ul class="rate-features"><li>Mon–Thu stays</li><li>Entire villa exclusive use</li><li>Private beach access</li><li>Free WiFi & parking</li><li>Up to 12 guests</li></ul><button class="btn-primary" style="width:100%;margin-top:1.5rem;" onclick="document.getElementById('inquiry-form').scrollIntoView({behavior:'smooth'})">Inquire Now</button></div>
+      <div class="rate-card featured"><div class="featured-badge">Most Popular</div><span class="rate-type">Weekend</span><div class="rate-price"><sup>₱</sup>15,000<span class="rate-per">/ night</span></div><div class="rate-divider"></div><ul class="rate-features"><li>Fri–Sun stays</li><li>Entire villa exclusive use</li><li>Private beach access</li><li>Free WiFi & parking</li><li>Up to 12 guests</li><li>Pet-friendly</li></ul><button class="btn-primary" style="width:100%;margin-top:1.5rem;" onclick="document.getElementById('inquiry-form').scrollIntoView({behavior:'smooth'})">Book Weekend</button></div>
+      <div class="rate-card"><span class="rate-type">Holiday / Long Weekend</span><div class="rate-price"><sup>₱</sup>18,000<span class="rate-per">/ night</span></div><div class="rate-divider"></div><ul class="rate-features"><li>Holiday period pricing</li><li>Entire villa exclusive use</li><li>Private beach access</li><li>Free WiFi & parking</li><li>Up to 12 guests</li><li>Pet-friendly</li></ul><button class="btn-primary" style="width:100%;margin-top:1.5rem;" onclick="document.getElementById('inquiry-form').scrollIntoView({behavior:'smooth'})">Inquire Now</button></div>
+    </div>
+    <div style="margin-top:4rem;"><span class="section-eyebrow">Add-Ons</span><h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;margin-bottom:1rem;">Enhance Your <em>Stay</em></h3><div class="addons-grid"><div class="addon-card"><div class="addon-price">₱500</div><div class="addon-name">Extra Guest (per head)</div></div><div class="addon-card"><div class="addon-price">₱1,500</div><div class="addon-name">Canoeing Session</div></div><div class="addon-card"><div class="addon-price">₱2,000</div><div class="addon-name">Fishing Trip</div></div><div class="addon-card"><div class="addon-price">₱800</div><div class="addon-name">BBQ Setup</div></div></div></div>
+  </section>
+  <div class="booking-form-section" id="inquiry-form">
+    <div class="booking-grid">
+      <div class="booking-info">
+        <span class="section-eyebrow">Reserve Your Escape</span><h2 class="section-title">Send a Booking <em>Inquiry</em></h2><div class="divider"></div>
+        <p class="section-body">Fill out the form and we'll confirm availability within 24 hours. Prefer to chat? Message us on Facebook for faster response.</p>
+        <a class="messenger-cta" href="https://www.facebook.com/resthouselaya" target="_blank"><div class="messenger-icon">💬</div><div class="messenger-text"><div class="mt">Message us on Facebook</div><div class="ms">Fast replies via Messenger</div></div></a>
+        <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid rgba(198,169,122,.2);"><p style="font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.8;">📍 <strong style="color:var(--sand);">Location:</strong> Laiya, San Juan, Batangas<br>🏖️ <strong style="color:var(--sand);">Min. Stay:</strong> 1 night<br>✅ <strong style="color:var(--sand);">Check-in:</strong> 2:00 PM · Check-out: 12:00 NN<br>💳 <strong style="color:var(--sand);">Payment:</strong> GCash / Bank Transfer</p></div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your name"></div>
+        <div class="form-row"><div class="form-group"><label class="form-label">Check-In Date</label><input type="date" class="form-input"></div><div class="form-group"><label class="form-label">Check-Out Date</label><input type="date" class="form-input"></div></div>
+        <div class="form-row"><div class="form-group"><label class="form-label">No. of Guests</label><input type="number" class="form-input" placeholder="e.g. 6" min="1" max="20"></div><div class="form-group"><label class="form-label">Phone / Messenger</label><input type="text" class="form-input" placeholder="+63 9XX XXX XXXX"></div></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        <div class="form-group"><label class="form-label">Special Requests</label><textarea class="form-input" rows="4" placeholder="Pets, dietary needs, occasion, add-ons..."></textarea></div>
+        <button class="btn-primary" style="width:100%;padding:15px;" onclick="submitInquiry(this)">Send Inquiry →</button>
+        <div id="form-success" style="display:none;margin-top:1rem;padding:1rem;background:rgba(122,138,123,.2);border:1px solid var(--olive);color:var(--sand);font-size:.82rem;">✅ Thank you! We'll confirm availability within 24 hours via email or Messenger.</div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-brand-logo">The Resthouse Laiya</div><div class="footer-brand-tagline">Private Beachfront Estate · Laiya, Batangas</div><p class="footer-brand-desc">A 9-hectare private sanctuary where the only crowd is yours, and the only agenda is peace.</p><div class="footer-social-row"><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">f</a><a class="footer-social-btn" href="https://www.instagram.com/resthouselaya" target="_blank">in</a><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">m</a></div></div><div><div class="footer-col-title">Navigate</div><ul class="footer-nav-links"><li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li><li><a href="javascript:void(0)" onclick="showPage('villas')">The Villa</a></li><li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li><li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li><li><a href="javascript:void(0)" onclick="showPage('rates')">Rates & Booking</a></li><li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li></ul></div><div><div class="footer-col-title">Get in Touch</div><div class="footer-contact-row"><span class="fci">📍</span><span class="fcv">Laiya, San Juan, Batangas, Philippines</span></div><div class="footer-contact-row"><span class="fci">📱</span><span class="fcv">+63 9XX XXX XXXX</span></div><div class="footer-contact-row"><span class="fci">📧</span><span class="fcv">inquiries@resthouselaya.com</span></div><div class="footer-contact-row"><span class="fci">🕐</span><span class="fcv">Check-in 2PM · Check-out 12NN</span></div><div class="footer-contact-row"><span class="fci">💬</span><span class="fcv"><a href="https://www.facebook.com/resthouselaya" target="_blank">Message on Facebook</a></span></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-left">© 2025 The Resthouse Laiya. All rights reserved.</div><div class="footer-bottom-right">Laiya · San Juan · Batangas · Philippines</div></div></footer>
+</div>
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div style="height:72px;background:var(--charcoal);"></div>
+  <section style="background:var(--charcoal);padding:3rem 5% 2rem;text-align:center;"><span class="section-eyebrow" style="color:var(--gold);">Get in Touch</span><h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--sand);font-weight:400;">We'd Love to <em style="color:var(--gold);">Hear from You</em></h1></section>
+  <section class="contact-section">
+    <div class="contact-grid">
+      <div>
+        <span class="section-eyebrow">Location & Details</span><h2 class="section-title">Find <em>The Resthouse</em></h2><div class="divider"></div>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="ci-label">Address</div><div class="ci-val">Laiya, San Juan, Batangas<br>Philippines</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📱</div><div><div class="ci-label">Phone / Messenger</div><div class="ci-val">+63 9XX XXX XXXX<br><a href="https://www.facebook.com/resthouselaya" target="_blank" style="color:var(--gold);">Message on Facebook</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-val">inquiries@resthouselaya.com</div></div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="ci-label">Inquiry Response</div><div class="ci-val">Within 24 hours<br>Check-in: 2PM · Check-out: 12NN</div></div></div>
+        <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31087.757385655345!2d121.37899!3d13.76533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6e78e2c4ea0d%3A0x4e8f4b2c0e1d0f0e!2sLaiya%2C%20San%20Juan%2C%20Batangas!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></div>
+      </div>
+      <div>
+        <div class="contact-form-box">
+          <span class="section-eyebrow" style="color:var(--gold);">Send a Message</span>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin:.5rem 0 1.5rem;color:var(--charcoal);font-weight:400;">Drop Us a Line</h3>
+          <div class="contact-form">
+            <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Full name"></div>
+            <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+            <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-input" placeholder="+63 9XX XXX XXXX"></div>
+            <div class="form-group"><label class="form-label">Subject</label><select class="form-input"><option>Booking Inquiry</option><option>General Question</option><option>Special Event</option><option>Media / Press</option></select></div>
+            <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="5" placeholder="How can we help you?"></textarea></div>
+            <button class="btn-primary" style="width:100%;padding:14px;" onclick="submitContact(this)">Send Message →</button>
+            <div id="contact-success" style="display:none;margin-top:1rem;padding:1rem;background:var(--cream);border:1px solid var(--gold);color:var(--charcoal);font-size:.82rem;">✅ Message received! We'll reply within 24 hours. You can also reach us on Facebook Messenger.</div>
+            <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--sand);text-align:center;"><p style="font-size:.75rem;color:#999;margin-bottom:.8rem;">Prefer to chat directly?</p><a class="btn-primary" href="https://www.facebook.com/resthouselaya" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;">💬 Message on Facebook</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="footer-inner"><div><div class="footer-brand-logo">The Resthouse Laiya</div><div class="footer-brand-tagline">Private Beachfront Estate · Laiya, Batangas</div><p class="footer-brand-desc">A 9-hectare private sanctuary where the only crowd is yours, and the only agenda is peace.</p><div class="footer-social-row"><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">f</a><a class="footer-social-btn" href="https://www.instagram.com/resthouselaya" target="_blank">in</a><a class="footer-social-btn" href="https://www.facebook.com/resthouselaya" target="_blank">m</a></div></div><div><div class="footer-col-title">Navigate</div><ul class="footer-nav-links"><li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li><li><a href="javascript:void(0)" onclick="showPage('villas')">The Villa</a></li><li><a href="javascript:void(0)" onclick="showPage('experience')">Experience</a></li><li><a href="javascript:void(0)" onclick="showPage('gallery')">Gallery</a></li><li><a href="javascript:void(0)" onclick="showPage('rates')">Rates & Booking</a></li><li><a href="javascript:void(0)" onclick="showPage('contact')">Contact</a></li></ul></div><div><div class="footer-col-title">Get in Touch</div><div class="footer-contact-row"><span class="fci">📍</span><span class="fcv">Laiya, San Juan, Batangas, Philippines</span></div><div class="footer-contact-row"><span class="fci">📱</span><span class="fcv">+63 9XX XXX XXXX</span></div><div class="footer-contact-row"><span class="fci">📧</span><span class="fcv">inquiries@resthouselaya.com</span></div><div class="footer-contact-row"><span class="fci">🕐</span><span class="fcv">Check-in 2PM · Check-out 12NN</span></div><div class="footer-contact-row"><span class="fci">💬</span><span class="fcv"><a href="https://www.facebook.com/resthouselaya" target="_blank">Message on Facebook</a></span></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-left">© 2025 The Resthouse Laiya. All rights reserved.</div><div class="footer-bottom-right">Laiya · San Juan · Batangas · Philippines</div></div></footer>
+</div>
+<!-- CHATBOT BUTTON -->
+<button id="chat-btn" onclick="toggleChat()" aria-label="Chat with us">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  <span class="chat-badge">1</span>
+</button>
+<!-- CHATBOT WINDOW -->
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">R</div>
+    <div class="chat-header-info">
+      <div class="chat-name">The Resthouse Laiya</div>
+      <div class="chat-status"><span class="chat-status-dot"></span> Online now</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">&#x2715;</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-suggestions" id="chatSuggestions">
+    <button class="sug-btn" onclick="askQ('rates')">&#x1F4B0; Rates</button>
+    <button class="sug-btn" onclick="askQ('checkin')">&#x1F550; Check-in</button>
+    <button class="sug-btn" onclick="askQ('location')">&#x1F4CD; Location</button>
+    <button class="sug-btn" onclick="askQ('capacity')">&#x1F465; Guests</button>
+    <button class="sug-btn" onclick="askQ('book')">&#x1F4C5; How to Book</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Type a question..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">&#x27A4;</button>
+  </div>
+</div>
+<script>
+(function(){
+/* PAGE NAV */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  var t=document.getElementById('page-'+id);
+  if(t)t.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  var nb=document.getElementById('navbar');
+  if(nb){if(id!=='home')nb.classList.add('scrolled');else if(window.scrollY<50)nb.classList.remove('scrolled');}
+  updateTabBar(id);
+}
+window.showPage=showPage;
+function tabNav(id){showPage(id);}
+window.tabNav=tabNav;
+function updateTabBar(id){
+  /* tab bar removed - kept for footer nav compatibility */
+}
+setTimeout(function(){var l=document.getElementById('loader');if(l)l.style.display='none';},3400);
+window.addEventListener('scroll',function(){
+  var nb=document.getElementById('navbar');if(!nb)return;
+  var ap=document.querySelector('.page.active');
+  if(ap&&ap.id!=='page-home')nb.classList.add('scrolled');
+  else if(window.scrollY>50)nb.classList.add('scrolled');
+  else nb.classList.remove('scrolled');
+});
+/* SLIDER */
+var currentSlide=0;
+function goSlide(n){
+  document.querySelectorAll('.hero-slide').forEach(function(s,i){s.classList.toggle('active',i===n);});
+  document.querySelectorAll('.hero-dot').forEach(function(d,i){d.classList.toggle('active',i===n);});
+  currentSlide=n;
+}
+window.goSlide=goSlide;
+setInterval(function(){var sl=document.querySelectorAll('.hero-slide');if(sl.length)goSlide((currentSlide+1)%sl.length);},5500);
+/* LIGHTBOX */
+var lbImages=[],lbIdx=0;
+function openLB(el){
+  var img=el.querySelector('img');
+  var par=el.closest('.masonry,.gallery-page-masonry');
+  if(par){lbImages=Array.from(par.querySelectorAll('.masonry-item img'));lbIdx=lbImages.indexOf(img);}
+  else{lbImages=[img];lbIdx=0;}
+  document.getElementById('lb-img').src=img.src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lbNav(dir){lbIdx=(lbIdx+dir+lbImages.length)%lbImages.length;document.getElementById('lb-img').src=lbImages[lbIdx].src;}
+window.openLB=openLB;window.closeLB=closeLB;window.lbNav=lbNav;
+var lb=document.getElementById('lightbox');
+if(lb)lb.addEventListener('click',function(e){if(e.target===this)closeLB();});
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='Escape')closeLB();
+    if(e.key==='ArrowLeft')lbNav(-1);
+    if(e.key==='ArrowRight')lbNav(1);
+  }
+});
+/* GALLERY */
+function filterGal(btn,cat){
+  document.querySelectorAll('.gal-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('#galGrid .masonry-item').forEach(function(item){
+    item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';
+  });
+}
+window.filterGal=filterGal;
+/* FORMS */
+function submitInquiry(btn){
+  btn.textContent='Sending...';btn.disabled=true;
+  setTimeout(function(){var s=document.getElementById('form-success');if(s)s.style.display='block';btn.textContent='Sent!';},1200);
+}
+function submitContact(btn){
+  btn.textContent='Sending...';btn.disabled=true;
+  setTimeout(function(){var s=document.getElementById('contact-success');if(s)s.style.display='block';btn.textContent='Sent!';},1200);
+}
+window.submitInquiry=submitInquiry;window.submitContact=submitContact;
+/* HAMBURGER */
+function toggleMenu(){
+  var menu=document.getElementById('mobileMenu');
+  var overlay=document.getElementById('mobileMenuOverlay');
+  var btn=document.getElementById('hamburger');
+  if(!menu)return;
+  var isOpen=menu.classList.contains('open');
+  if(isOpen){
+    menu.classList.remove('open');if(overlay)overlay.classList.remove('open');
+    if(btn)btn.classList.remove('open');document.body.style.overflow='';
+  }else{
+    menu.classList.add('open');if(overlay)overlay.classList.add('open');
+    if(btn)btn.classList.add('open');document.body.style.overflow='hidden';
+  }
+}
+window.toggleMenu=toggleMenu;
+/* CHATBOT */
+var chatOpen=false,chatStarted=false;
+var qna=[
+  {k:['rate','price','cost','how much','magkano','bayad'],a:'Our rates:<br><br><b>Weekday (Mon-Thu):</b> P12,000/night<br><b>Weekend (Fri-Sun):</b> P15,000/night<br><b>Holiday:</b> P18,000/night<br><br>All rates cover exclusive use of the entire estate.'},
+  {k:['check in','check-in','checkin','arrive','arrival','check out','check-out','checkout','leave'],a:'<b>Check-in: 2:00 PM</b><br><b>Check-out: 12:00 NN</b><br><br>Early check-in or late check-out may be arranged subject to availability.'},
+  {k:['location','where','address','laiya','batangas','how to get','direction'],a:'We are in <b>Laiya, San Juan, Batangas</b>.<br><br>About 3-4 hours from Metro Manila via SLEX, STAR Tollway, Lipa, San Juan.'},
+  {k:['guest','capacity','how many','pax','people','person'],a:'The villa accommodates <b>up to 12 guests</b>. Extra guests beyond 12 are charged P500 per head.'},
+  {k:['book','reserve','reservation','booking','available','availability'],a:'To book:<br>1. Go to our Rates page<br>2. Fill out the inquiry form<br>3. We confirm within 24 hours!<br><br>You can also message us on Facebook Messenger.'},
+  {k:['payment','pay','gcash','bank','transfer','deposit','downpayment'],a:'We accept <b>GCash</b> and <b>Bank Transfer</b>.<br><br>50% downpayment to confirm. Balance due on check-in.'},
+  {k:['cancel','cancellation','refund','reschedule'],a:'Cancellations 7 or more days before: full refund.<br>Within 7 days: downpayment may be forfeited.<br>Rescheduling welcome subject to availability.'},
+  {k:['bedroom','bed','room','sleep'],a:'The villa has <b>2 spacious bedrooms</b> with quality beds, fresh linens, and aircon. Living room has sofa beds for extra guests.'},
+  {k:['bathroom','toilet','cr','comfort room','shower','bath'],a:'There are <b>3 bathrooms</b> - one per bedroom plus one shared. All with hot and cold shower.'},
+  {k:['kitchen','cook','cooking','food','bring food'],a:'Fully equipped kitchen with gas stove, refrigerator, utensils and cookware. Bring and cook your own food. Optional BBQ setup for P800.'},
+  {k:['wifi','internet','signal','connection'],a:'Yes, <b>free WiFi</b> throughout the villa. Fast enough for streaming and video calls.'},
+  {k:['aircon','air conditioning','ac','fan'],a:'Yes! <b>All bedrooms have aircon</b>. Living area has ceiling fans.'},
+  {k:['pet','dog','cat','animal'],a:'We are <b>pet-friendly!</b> Your pets are welcome. Ensure they are well-behaved and bring their supplies.'},
+  {k:['parking','car','vehicle','park'],a:'Yes, <b>free parking</b> available for multiple vehicles.'},
+  {k:['pool','swimming pool'],a:'No private pool but you have your own <b>private beach with direct sea access</b>. Waters in Laiya are calm and safe.'},
+  {k:['beach','sand','sea','ocean'],a:'<b>100 meters of exclusive private beachfront</b>. White sand, calm waters, just your group.'},
+  {k:['activity','activities','what to do','things to do','adventure'],a:'Things to enjoy:<br>- Private beach and swimming<br>- Kayaking<br>- Sunset bonfires<br>- Bird watching<br>- Turtle nesting<br>- Adventure Park (10 min)<br>- Catamaran tours<br>- Local food trail'},
+  {k:['turtle','sea turtle','nesting','pawikan'],a:'The estate borders an <b>active sea turtle nesting area</b>. Witnessing turtles nesting at dusk is magical!'},
+  {k:['bird','birds','wildlife','nature'],a:'The estate has native birds including <b>kingfishers, herons, and bee-eaters</b>. A nature paradise!'},
+  {k:['nearby','around','adventure park','zipline','atv','catamaran'],a:'Nearby:<br>- <b>Laiya Adventure Park</b> (10 min) - zipline, ATV, wall climbing<br>- <b>Catamaran and Mangrove Tours</b><br>- <b>Food Trail</b> (15 min) - lomi, bulalo, kapeng barako'},
+  {k:['minimum stay','min stay','1 night','one night','overnight'],a:'Minimum stay is <b>1 night</b>. Multi-night stays welcome at the same per-night rate.'},
+  {k:['addon','add on','extra','bbq','kayak','fishing'],a:'Add-ons:<br>- BBQ Setup: P800<br>- Canoeing: P1,500<br>- Fishing Trip: P2,000<br>- Extra Guest: P500 per head'},
+  {k:['exclusive','private','whole','entire','share'],a:'Yes! <b>Exclusive use of the entire estate</b> - villa, beach, and grounds. No other guests at all.'},
+  {k:['contact','reach','message','call','phone','email','facebook'],a:'Reach us via:<br>Phone: +63 9XX XXX XXXX<br>Email: inquiries@resthouselaya.com<br>Facebook: @resthouselaya'},
+  {k:['how far','travel time','drive','manila','hours','distance'],a:'From Metro Manila: about <b>3-4 hours</b> via SLEX, STAR Tollway, Lipa, San Juan, Batangas.'},
+  {k:['safe','security','secure','guard'],a:'The property is <b>gated and privately secured</b>. Your group is the only one on the property at a time.'},
+  {k:['electricity','power','water','utilities'],a:'Full utilities: <b>electricity, running water, hot and cold shower</b>, and all standard amenities.'},
+  {k:['inclusions','include','included'],a:'Inclusions:<br>- Exclusive villa and grounds<br>- Private beach access<br>- Free WiFi and parking<br>- Full kitchen use'},
+  {k:['hello','hi','hey','good morning','good afternoon','good evening','kumusta','musta'],a:'Hello! Welcome to <b>The Resthouse Laiya</b>! I am here to answer your questions. What would you like to know?'},
+  {k:['thank','thanks','salamat','ok','okay','great','perfect','noted','sure'],a:'You are most welcome! Feel free to ask anything else. We would love to host you at The Resthouse Laiya!'},
+];
+function toggleChat(){
+  chatOpen=!chatOpen;
+  var w=document.getElementById('chat-window');
+  var badge=document.querySelector('.chat-badge');
+  if(!w)return;
+  if(chatOpen){
+    w.classList.add('open');if(badge)badge.style.display='none';
+    if(!chatStarted){
+      chatStarted=true;
+      setTimeout(function(){addMsg('bot','Hello! Welcome to The Resthouse Laiya. I can help with rates, check-in, location, amenities, and booking. What would you like to know?');},400);
+    }
+    setTimeout(function(){var m=document.getElementById('chatMessages');if(m)m.scrollTop=m.scrollHeight;},200);
+  }else{w.classList.remove('open');}
+}
+window.toggleChat=toggleChat;
+function addMsg(type,text){
+  var m=document.getElementById('chatMessages');if(!m)return;
+  var d=document.createElement('div');d.className='msg '+type;d.innerHTML=text;
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function showTyping(){
+  var m=document.getElementById('chatMessages');if(!m)return;
+  var d=document.createElement('div');d.className='msg typing';d.id='typingIndicator';
+  d.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function removeTyping(){var t=document.getElementById('typingIndicator');if(t)t.remove();}
+function getBotAnswer(input){
+  var text=input.toLowerCase();
+  for(var i=0;i<qna.length;i++){
+    for(var j=0;j<qna[i].k.length;j++){
+      if(text.indexOf(qna[i].k[j])!==-1)return qna[i].a;
+    }
+  }
+  return 'Thanks for your question! Please message us on Facebook @resthouselaya or call +63 9XX XXX XXXX.';
+}
+function sendChat(){
+  var inp=document.getElementById('chatInput');if(!inp)return;
+  var text=inp.value.trim();if(!text)return;
+  addMsg('user',text);inp.value='';showTyping();
+  setTimeout(function(){removeTyping();addMsg('bot',getBotAnswer(text));},800);
+}
+window.sendChat=sendChat;
+function askQ(topic){
+  var qs={rates:'What are your rates?',checkin:'What time is check-in and check-out?',location:'Where is The Resthouse Laiya?',capacity:'How many guests can you accommodate?',book:'How do I book?'};
+  var q=qs[topic]||topic;
+  var w=document.getElementById('chat-window');if(!w)return;
+  if(!w.classList.contains('open'))toggleChat();
+  setTimeout(function(){addMsg('user',q);showTyping();setTimeout(function(){removeTyping();addMsg('bot',getBotAnswer(q));},800);},chatStarted?100:900);
+}
+window.askQ=askQ;
+/* INIT */
+showPage('home');
+})();
+</script>
 </body>
 </html>
